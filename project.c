@@ -2,7 +2,6 @@
 #include <math.h>
 #include <time.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -15,7 +14,7 @@ int main()
     SetTargetFPS(30);
 
     const float zoomSpeed = 1.0001f;
-    const float moveSpeed = 0.1f;
+    const float moveSpeed = 0.01f;
 
     // range of cord
     Rectangle mandelbrotRect = {-2.0f, -1.0f, 3.0f, 2.0f};
@@ -36,12 +35,30 @@ int main()
         mandelbrotRect.width *= !IsMouseButtonDown(MOUSE_BUTTON_RIGHT) ? zoomSpeed : 1.01f / zoomSpeed;
         mandelbrotRect.height *= !IsMouseButtonDown(MOUSE_BUTTON_RIGHT) ? zoomSpeed : 1.01f / zoomSpeed;
 
+      
+
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        {
+        if (mousep.y > HEIGHT/2 + 50)
+        {
+            mandelbrotRect.y -=  moveSpeed * mandelbrotRect.height;
+        }
+        else if (mousep.y < HEIGHT / 2 - 50){
+            mandelbrotRect.y += moveSpeed * mandelbrotRect.height;
+        }
+        if (mousep.x > WIDTH / 2 + 50) 
+            mandelbrotRect.x -=  (moveSpeed * mandelbrotRect.height) ; 
+        else if ( mousep.x < WIDTH / 2 - 50)
+            mandelbrotRect.x +=  moveSpeed * mandelbrotRect.height; 
+
+        
         mandelbrotRect.width /= !IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? zoomSpeed : 1.01f * zoomSpeed;
-        mandelbrotRect.height /= !IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? zoomSpeed : 1.01f * zoomSpeed;
+        mandelbrotRect.height /= !IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? zoomSpeed : 1.01f * zoomSpeed; 
 
+        }
+        
 
-
-          // draw
+        // draw
         BeginDrawing();
         ClearBackground(GRAY);
 
@@ -79,7 +96,6 @@ int main()
                 }
 
                 DrawPixel(px, py, color);
-
             }
         }
 
