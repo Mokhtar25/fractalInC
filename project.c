@@ -2,6 +2,7 @@
 #include <math.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -13,11 +14,11 @@ int main()
     InitWindow(WIDTH, HEIGHT, "Mandelbrot set");
     SetTargetFPS(30);
 
-    Camera2D camera = {0};
-    camera.offset = (Vector2){WIDTH / 2.0f, HEIGHT / 2.0f};
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
-    const float zoomSpeed = 1.01f;
+    const float zoomSpeed = 1.0001f;
+    const float moveSpeed = 0.1f;
+
+    // range of cord
+    Rectangle mandelbrotRect = {-2.0f, -1.0f, 3.0f, 2.0f};
 
     float x = 0;
     float y = 0;
@@ -29,25 +30,18 @@ int main()
 
     while (!WindowShouldClose())
     {
-        if (IsKeyDown(KEY_A))
-            camera.rotation--;
-        else if (IsKeyDown(KEY_S))
-            camera.rotation++;
+        Vector2 mousep = GetMousePosition();
 
-        if (camera.rotation > 40)
-            camera.rotation = 40;
-        else if (camera.rotation < -40)
-            camera.rotation = -40;
+        // mouse zoom in and out
+        mandelbrotRect.width *= !IsMouseButtonDown(MOUSE_BUTTON_RIGHT) ? zoomSpeed : 1.01f / zoomSpeed;
+        mandelbrotRect.height *= !IsMouseButtonDown(MOUSE_BUTTON_RIGHT) ? zoomSpeed : 1.01f / zoomSpeed;
 
-        camera.zoom *= IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? zoomSpeed : 1.0f / zoomSpeed;
+        mandelbrotRect.width /= !IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? zoomSpeed : 1.01f * zoomSpeed;
+        mandelbrotRect.height /= !IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? zoomSpeed : 1.01f * zoomSpeed;
 
-        if (IsKeyPressed(KEY_R))
-        {
-            camera.zoom = 1.0f;
-            camera.rotation = 0.0f;
-        }
 
-        // draw
+
+          // draw
         BeginDrawing();
         ClearBackground(GRAY);
 
@@ -56,8 +50,8 @@ int main()
             for (int py = 0; py < HEIGHT; py++)
             {
 
-                x0 = (float)px / WIDTH * 3.5 - 2.5;
-                y0 = (float)py / HEIGHT * 2 - 1;
+                float x0 = mandelbrotRect.x + (float)px / WIDTH * mandelbrotRect.width;
+                float y0 = mandelbrotRect.y + (float)py / HEIGHT * mandelbrotRect.height;
 
                 x = 0;
                 y = 0;
@@ -85,6 +79,7 @@ int main()
                 }
 
                 DrawPixel(px, py, color);
+
             }
         }
 
