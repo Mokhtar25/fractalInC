@@ -21,7 +21,7 @@ You can easily change the color by editing the (r,g,b) values at the end of the 
 
 ###A The Included files
 1-project.c is the main file and is compiled to make the program.
-2-Makefile is to easily compile the Program with the command make project
+2-Makefile is to easily compile the Program with the command make `project`
 3-librarylib.a is the Raylib dependencies that are required to compile the program
 4-README.md is description to the project
 5-project is just the compiled program you can run it by `./project`
