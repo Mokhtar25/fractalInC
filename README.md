@@ -16,6 +16,9 @@ The program has some constant values that you can change like moveSpeed to contr
 There are some macros as well at the head of the page. You can increase the width to make the window wider or the height to make the window taller. And there is the MAX_ITERATION. That controls how deep you can go inside the shape and how detailed it is. You can make increase to make it more detailed and to dive deeper but that would come at the cost of performance and it will consume a lot of processing power. 
 
 
+##A requirements 
+Raylib must be installed to compile.
+
 ##A Changing color 
 You can easily change the color by editing the (r,g,b) values at the end of the page. And you can also add some interesting color patterns when using a random number generator. That is also add but commented out. So it's easily implemented.
 
