@@ -5,13 +5,13 @@
 
 #define WIDTH 800
 #define HEIGHT 600
-#define MAX_ITERATION 100
+#define MAX_ITERATION 80
 
 int main()
 {
 
     InitWindow(WIDTH, HEIGHT, "Mandelbrot set");
-    SetTargetFPS(60);
+    SetTargetFPS(40);
 
 
     const float zoomSpeed = 1.0001f;
@@ -97,9 +97,9 @@ int main()
                     // color changing
                     srand(time(NULL));
                     int rs = rand();
-                    int r = 220;
-                    int g = (150 * iter / MAX_ITERATION);
-                    int b = 225 * iter / MAX_ITERATION;
+                    int r = 150;
+                    int g = (100 * iter / MAX_ITERATION);
+                    int b = 50 * iter / MAX_ITERATION;
                     color = (Color){r, g, b, 255};
                 }
 
