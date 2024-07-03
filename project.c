@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 
+
 #define WIDTH 800
 #define HEIGHT 600
 #define MAX_ITERATION 80
@@ -11,7 +12,8 @@ int main()
 {
 
     InitWindow(WIDTH, HEIGHT, "Mandelbrot set");
-    SetTargetFPS(40);
+    SetTargetFPS(45);
+    //st
 
 
     const float zoomSpeed = 1.0001f;
