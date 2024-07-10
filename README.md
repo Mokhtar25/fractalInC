@@ -19,7 +19,7 @@ There are some macros as well at the head of the page. You can increase the widt
 ##A requirements 
 Raylib must be installed to compile.
 
-##A Changing color 
+## Changing color 
 You can easily change the color by editing the (r,g,b) values at the end of the page. And you can also add some interesting color patterns when using a random number generator. That is also add but commented out. So it's easily implemented.
 
 ###A The Included files
